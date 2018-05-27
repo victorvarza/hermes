@@ -1,0 +1,14 @@
+
+mail:
+ to: 'user@domain'
+ from: 'user@domain'
+ smtp_server: "127.0.0.1"
+
+monitor_paths:
+  - name: cam01
+    path: "/monitor/cam01"
+    gdrive_folder_id: "aaaxxxyyy"
+
+gdrive_cred_path: "/app/conf/gdrive_cred.json"
+archive_path: "/monitor/archive"
+retention: 30
