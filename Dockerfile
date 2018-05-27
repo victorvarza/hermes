@@ -16,5 +16,4 @@ COPY docker-entrypoint.sh /
 # set permissions
 RUN chmod +x /docker-entrypoint.sh
 
-# ENTRYPOINT [ "/usr/local/bin/dumb-init", "/docker-entrypoint.sh" ] # not supported in arm64
-ENTRYPOINT [ "/docker-entrypoint.sh" ]
+ENTRYPOINT [ "/usr/local/bin/dumb-init", "/docker-entrypoint.sh" ]
