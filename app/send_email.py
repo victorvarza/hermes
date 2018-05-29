@@ -43,5 +43,6 @@ class SendEmail():
             Logs.Print("Exception: " + str(e))
 
         finally:
-            server.quit()
+            if server:
+                server.quit()
 
