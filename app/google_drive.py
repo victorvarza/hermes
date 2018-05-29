@@ -10,21 +10,16 @@ class MyGoogleDrive():
     def __init__(self, cred_path):
 
         gauth = GoogleAuth()
-        # Try to load client credentials
         gauth.LoadCredentialsFile(cred_path)
 
         if gauth.credentials is None:
-            # Authenticate if they're not there
             gauth.LocalWebserverAuth()
         elif gauth.access_token_expired:
-            # Refresh them if expired
             gauth.Refresh()
         else:
-            # Initialize the saved creds
             gauth.Authorize()
-            # Save the current credentials to a file
-            gauth.SaveCredentialsFile(cred_path)
 
+        gauth.SaveCredentialsFile(cred_path)
         self.drive = GoogleDrive(gauth)
         
     def push(self, file_path, folder_id):

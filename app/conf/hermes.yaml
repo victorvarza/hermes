@@ -1,14 +1,18 @@
 
+
 mail:
- to: 'user@domain'
- from: 'user@domain'
- smtp_server: "127.0.0.1"
+ to: 'victor.varza@gmail.com'
+ from: 'home@qedzone.ro'
+ smtp_server: "192.168.69.4"
 
 monitor_paths:
   - name: cam01
     path: "/monitor/cam01"
-    gdrive_folder_id: "aaaxxxyyy"
+    gdrive_folder_id: "1PzOV53RNvkGj0avzCZwIQjIo7DeL6Nv8"
+  - name: cam02
+    path: "/monitor/cam02"
+    gdrive_folder_id: "1wicCcyWcwAg5eBlXwsGAHySgmYmjzo_X"
 
 gdrive_cred_path: "/app/conf/gdrive_cred.json"
 archive_path: "/monitor/archive"
-retention: 30
+retention: 5
