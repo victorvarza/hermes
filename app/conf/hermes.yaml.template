@@ -1,0 +1,15 @@
+
+
+mail:
+ to: 'john@gmail.com'
+ from: 'alice@localhost'
+ smtp_server: '192.168.1.1'
+
+monitor_paths:
+  - name: 'foo'
+    path: '/mnt/foo'
+    gdrive_folder_id: 'xxxyyyzzz'
+
+gdrive_cred_path: "/app/conf/gdrive_cred.json"
+archive_path: "/monitor/archive"
+retention: 5
