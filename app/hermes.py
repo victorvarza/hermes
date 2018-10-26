@@ -10,9 +10,9 @@ from logs import Logs
 
 class Hermes():
 
-    def __init__(self):
+    def __init__(self, conf_file):
         self.pidfile = "/tmp/hermes.pid"
-        self.conf_file = '/app/conf/hermes.yaml'
+        self.conf_file = conf_file
         self.__lock_pid()
         self.conf_data = self.__read_conf()
 
@@ -96,7 +96,9 @@ class Hermes():
                 Logs.Print("Exception: " + str(e))
 
 if __name__ == "__main__":
-    hermes = Hermes()
+
+    conf_file = sys.argv[2]
+    hermes = Hermes(conf_file)
 
     if len(sys.argv) > 1 and sys.argv[1] == "cleanup":
         hermes.cleanup()
