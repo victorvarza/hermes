@@ -13,7 +13,6 @@ class Hermes():
     def __init__(self, conf_file):
         self.pidfile = "/tmp/hermes.pid"
         self.conf_file = conf_file
-        self.__lock_pid()
         self.conf_data = self.__read_conf()
 
         # Initiate objects
