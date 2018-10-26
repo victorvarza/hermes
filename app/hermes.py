@@ -96,11 +96,9 @@ class Hermes():
                 Logs.Print("Exception: " + str(e))
 
 if __name__ == "__main__":
+    hermes = Hermes("app/conf/hermes.yaml")
 
-    conf_file = sys.argv[1]
-    hermes = Hermes(conf_file)
-
-    if len(sys.argv) > 2 and sys.argv[2] == "cleanup":
+    if len(sys.argv) > 1 and sys.argv[1] == "cleanup":
         hermes.cleanup()
     else:
         hermes.app()
