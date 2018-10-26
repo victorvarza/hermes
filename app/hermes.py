@@ -18,7 +18,6 @@ class Hermes():
 
         # Initiate objects
         self.file_system = FileSystem(self.conf_data['archive_path'])
-        self.google_drive = MyGoogleDrive(self.conf_data['gdrive_cred_path'])
         self.mail = SendEmail(self.conf_data['mail'])
 
 
@@ -33,10 +32,10 @@ class Hermes():
 
     def __lock_pid(self):
         self.pid = str(os.getpid())
-        # if os.path.isfile(self.pidfile):
-        #     Logs.Print("%s already exists, exiting" % self.pidfile)
-        #     sys.exit()
-        #
+        if os.path.isfile(self.pidfile):
+            Logs.Print("%s already exists, exiting" % self.pidfile)
+            sys.exit()
+        
         with open(self.pidfile, 'w') as fwrie:
              fwrie.write(self.pid)
 
@@ -60,9 +59,12 @@ class Hermes():
                         Logs.Print("======================================================")
                         Logs.Print(str(time_now) + ":    Found alarm on "  + monitor_path['name'])
 
+                        # Create google_drive object 
+                        google_drive = MyGoogleDrive(self.conf_data['gdrive_cred_path'])
+
                         # Upload images into google drive
                         for file in files:
-                            self.google_drive.push(file, monitor_path['gdrive_folder_id'])
+                            google_drive.push(file, monitor_path['gdrive_folder_id'])
 
                         self.mail.sendMessage(file, monitor_path['name'])
                         self.file_system.archive_files(files, monitor_path['name'])
@@ -84,7 +86,8 @@ class Hermes():
                 Logs.Print("Start cleaning process.")
 
                 self.file_system.cleanup_archive(retention)
-                self.google_drive.cleanup(retention, gdrive_folder_ids)
+                google_drive = MyGoogleDrive(self.conf_data['gdrive_cred_path'])
+                google_drive.cleanup(retention, gdrive_folder_ids)
 
                 Logs.Print("Stop cleaning process.")
 
