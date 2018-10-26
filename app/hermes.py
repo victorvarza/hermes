@@ -97,10 +97,10 @@ class Hermes():
 
 if __name__ == "__main__":
 
-    conf_file = sys.argv[2]
+    conf_file = sys.argv[1]
     hermes = Hermes(conf_file)
 
-    if len(sys.argv) > 1 and sys.argv[1] == "cleanup":
+    if len(sys.argv) > 2 and sys.argv[2] == "cleanup":
         hermes.cleanup()
     else:
         hermes.app()
