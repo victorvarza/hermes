@@ -23,11 +23,13 @@ class Hermes():
     def __exit__(self):
         os.unlink(self.pidfile)
 
+
     def __read_conf(self):
         with open(self.conf_file) as f:
             yaml_data = yaml.load(f)
 
         return yaml_data
+
 
     def __lock_pid(self):
         self.pid = str(os.getpid())
@@ -38,9 +40,16 @@ class Hermes():
         with open(self.pidfile, 'w') as fwrie:
              fwrie.write(self.pid)
 
+
     def app(self):
 
         Logs.Print("Starting Hermes App..")
+
+        Logs.Print("Paths to monitor:")
+        for monitor_path in self.conf_data['monitor_paths']:
+            Logs.Print("{0}: {1}".format(monitor_path['name'],monitor_path['path']))     
+
+        Logs.Print("Archive path: {0}".format(self.conf_data['archive_path']))
 
         while 1:
             try:
@@ -49,7 +58,12 @@ class Hermes():
                     # Check if there are any files in these paths
                     files = self.file_system.list_files(monitor_path['path'])
 
-                    # wait 2 seconds for ftp transfer
+                    # check if the files are ok to be processed
+                    for file in files:
+                        if os.path.getsize(file) < self.conf_data['file_size_min']:
+                            files.remove(file)
+
+                    # wait 2 seconds 
                     time.sleep(2)
 
                     if files:
@@ -70,6 +84,7 @@ class Hermes():
 
             except Exception as e:
                 Logs.Print("Exception: " + str(e))
+
 
     def cleanup(self):
 
@@ -93,6 +108,7 @@ class Hermes():
                 time.sleep(86400)
             except Exception as e:
                 Logs.Print("Exception: " + str(e))
+
 
 if __name__ == "__main__":
     hermes = Hermes("app/conf/hermes.yaml")

@@ -1,7 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
-app/conf/*.json
-app/conf/hermes.yaml
-.idea/
-local_conf.txt
-*.iml
+.vscode
 *.pyc
+
+app/conf/*.json
+app/conf/*.yaml
+client_secrets.json
+monitor
+venv
