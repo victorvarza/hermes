@@ -61,7 +61,11 @@ class Hermes():
                     # check if the files are ok to be processed
                     for file in files:
                         if os.path.getsize(file) < self.conf_data['file_size_min']:
-                            files.remove(file)
+                            current_time = time.time()
+                            creation_time = os.path.getctime(file)
+                            if (current_time - creation_time) < 60: # older than 1 minutes are ok to be processed
+                                Logs.Print("File: {0} is too small to be processed.".format(file))
+                                files.remove(file)
 
                     # wait 2 seconds 
                     time.sleep(2)
