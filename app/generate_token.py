@@ -1,7 +1,7 @@
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
-cred_path = "conf/gdrive_cred.json"
+cred_path = "app/conf/gdrive_cred.json"
 gauth = GoogleAuth()
 gauth.LoadCredentialsFile(cred_path)
 
@@ -12,5 +12,6 @@ elif gauth.access_token_expired:
 else:
     gauth.Authorize()
 
+print("Writing credentials to {0}".format(cred_path))
 gauth.SaveCredentialsFile(cred_path)
 drive = GoogleDrive(gauth)

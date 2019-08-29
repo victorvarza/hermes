@@ -1,14 +1,12 @@
-FROM python:3.6-alpine3.7
+FROM python:3.7.4-slim-buster
 
 MAINTAINER Victor Varza <victor.varza@gmail.com>
 
-RUN apk update && pip install PyYAML PyDrive
-
-# copy config files
 COPY app/ /app
 COPY docker-entrypoint.sh /
+COPY requirements.txt /
 
-# set permissions
+RUN pip install -r /requirements.txt
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
