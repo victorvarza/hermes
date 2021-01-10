@@ -13,7 +13,7 @@ dev.setup:
 #	source ./venv/bin/activate
 #	pip install -r requirements.txt	
 
-dev.run: dev.cleanup
+dev.run: 
 	docker run -d --name hermes \
 		-v $(shell pwd)/monitor:/monitor \
 		-v $(shell pwd)/app/conf:/app/conf \

@@ -1,4 +1,5 @@
 FROM python:3.7.4-slim-buster
+# FROM arm64v8/python:3-slim
 
 MAINTAINER Victor Varza <victor.varza@gmail.com>
 
